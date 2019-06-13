@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,6 +30,11 @@ public class User {
     // 在没有声明时默认为1
     private int authority = 1;
     private int jiankaonum = 0;
+
+    //sxr添加
+    @OneToMany(mappedBy = "user")
+    List<Exam> exams;
+    //添加结束
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
             updatable = false,
             insertable = false)
