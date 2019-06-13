@@ -1,4 +1,4 @@
-POST http://localhost:8080/api/admin/adduser
+POST http://localhost:8080/api/admin/updateuser
 Content-Type: application/json
 
 {
@@ -8,7 +8,8 @@ Content-Type: application/json
   "intro":"student",
   "phonenum": "123456",
   "password": "1003",
-  "authority": 1
+  "authority": 1,
+  "id":4
 }
 
 ###
