@@ -2,13 +2,13 @@ POST http://localhost:8080/api/admin/adduser
 Content-Type: application/json
 
 {
-  "number": "1003",
-  "name": "ghw",
+  "number": "1001",
+  "name": "沈希瑞",
   "pro": "软件工程",
   "intro":"student",
   "phonenum": "123456",
-  "password": "1003",
-  "authority": 1
+  "password": "1001",
+  "authority": 2
 }
 
 ###
