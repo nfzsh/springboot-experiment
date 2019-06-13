@@ -54,7 +54,10 @@ public class AdminController {
         Optional.ofNullable(user)
                 .ifPresentOrElse(u -> {
                     String swd;
-                    swd = passwordEncoder.encode(user.getPassword());
+                    if (user.getPassword().equals("") || user.getPassword() == null)
+                        swd = "";
+                    else
+                        swd = passwordEncoder.encode(user.getPassword());
                     updateUserService.UpdateUser(user.getNumber(), user.getName(), user.getPro(),
                             user.getIntro(), user.getPhonenum(), swd, user.getAuthority(), user.getId());
                 }, () -> {

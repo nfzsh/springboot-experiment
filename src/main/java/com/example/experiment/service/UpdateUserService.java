@@ -10,8 +10,15 @@ import org.springframework.transaction.annotation.Transactional;
 public class UpdateUserService {
     @Autowired
     private UpdateUserRepository updateUserRepository;
+
     public void UpdateUser(String number, String name, String pro, String intro,
-                              String phonenum, String password, int authority, int id){
-        updateUserRepository.Update(number, name, pro, intro, phonenum, password, authority, id);
+                           String phonenum, String password, int authority, int id) {
+        if (password.equals(""))
+            updateUserRepository.Update(number, name, pro, intro, phonenum, authority, id);
+        else
+            updateUserRepository.Update(number, name, pro, intro, phonenum, password, authority, id);
+    }
+    public void UpdateNum(int id){
+        updateUserRepository.Update(id);
     }
 }

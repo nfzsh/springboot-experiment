@@ -28,6 +28,7 @@ public class User {
     private String password;
     // 在没有声明时默认为1
     private int authority = 1;
+    private int jiankaonum = 0;
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
             updatable = false,
             insertable = false)
@@ -36,14 +37,15 @@ public class User {
     public User(int id) {
         this.id = id;
     }
+
     public User(String number, String name, String pro, String intro,
-                String phonenum, String password, int authority){
+                String phonenum, String password, int authority) {
         this.number = number;
-        this.name =name;
+        this.name = name;
         this.pro = pro;
         this.intro = intro;
         this.phonenum = phonenum;
-        this.password =password;
-        this.authority =authority;
+        this.password = password;
+        this.authority = authority;
     }
 }

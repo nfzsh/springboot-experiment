@@ -2,6 +2,7 @@ package com.example.experiment.controller;
 
 import com.example.experiment.component.EncryptorComponent;
 import com.example.experiment.entity.User;
+import com.example.experiment.service.UpdateUserService;
 import com.example.experiment.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,8 @@ public class LoginController {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private EncryptorComponent encryptorComponent;
+    @Autowired
+    private UpdateUserService updateUserService;
 
     @PostMapping("/login")
     public void login(@RequestBody User user, HttpServletResponse response) {
@@ -51,6 +54,21 @@ public class LoginController {
                     response.setHeader("role", role);
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "用户名或密码错误");
+                });
+    }
+    @PostMapping("/updateuser")
+    public void UpdateUser(@RequestBody User user, HttpServletResponse response) {
+        Optional.ofNullable(user)
+                .ifPresentOrElse(u -> {
+                    String swd;
+                    if (user.getPassword().equals("") || user.getPassword() == null)
+                        swd = "";
+                    else
+                        swd = passwordEncoder.encode(user.getPassword());
+                    updateUserService.UpdateUser(user.getNumber(), user.getName(), user.getPro(),
+                            user.getIntro(), user.getPhonenum(), swd, user.getAuthority(), user.getId());
+                }, () -> {
+                    throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "信息不能为空！");
                 });
     }
 }

@@ -11,8 +11,20 @@ public interface UpdateUserRepository extends CustomizedRepoistory<User, Integer
     @Modifying
     @Query("UPDATE User u SET u.number=:number, u.name=:name, u.pro=:pro, u.intro=:intro, " +
             "u.phonenum=:phonenum, u.password=:password, u.authority=:authority WHERE u.id=:id")
-    void Update(@Param("number") String number,@Param("name") String name, @Param("pro") String pro,
+    void Update(@Param("number") String number, @Param("name") String name, @Param("pro") String pro,
                 @Param("intro") String intro, @Param("phonenum") String phonenum,
                 @Param("password") String password, @Param("authority") int authority,
                 @Param("id") int id);
+
+    @Modifying
+    @Query("UPDATE User u SET u.number=:number, u.name=:name, u.pro=:pro, u.intro=:intro, " +
+            "u.phonenum=:phonenum, u.authority=:authority WHERE u.id=:id")
+    void Update(@Param("number") String number, @Param("name") String name, @Param("pro") String pro,
+                @Param("intro") String intro, @Param("phonenum") String phonenum,
+                @Param("authority") int authority, @Param("id") int id);
+
+    @Modifying
+    @Query("UPDATE User u SET u.jiankaonum=u.jiankaonum+1 WHERE u.id=:id")
+    void Update(@Param("id") int id);
+
 }
