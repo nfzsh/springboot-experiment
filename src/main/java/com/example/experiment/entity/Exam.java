@@ -26,7 +26,7 @@ public class Exam {
     private LocalDateTime endTime;//考试结束时间
     @ManyToOne
     User user;
-    @Column(columnDefinition = "TIME INSTAMP NOT NULL DEFAULT CURRENT_TIMEINSTAMP",
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
     updatable = false,
     insertable = false)
     private LocalDateTime insertTime;
