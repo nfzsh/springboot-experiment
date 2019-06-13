@@ -1,0 +1,9 @@
+POST http://localhost:8080/api/admin/deleteuser
+Content-Type: application/json
+
+{
+  "number": "1004"
+
+}
+
+###

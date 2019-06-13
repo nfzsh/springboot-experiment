@@ -2,20 +2,17 @@ package com.example.experiment.controller;
 
 import com.example.experiment.entity.User;
 import com.example.experiment.service.AddUserService;
+import com.example.experiment.service.DeleteUserService;
 import com.example.experiment.service.UpdateUserService;
 import com.example.experiment.service.UserService;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.netty.handler.codec.json.JsonObjectDecoder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -28,6 +25,8 @@ public class AdminController {
     UpdateUserService updateUserService;
     @Autowired
     UserService userService;
+    @Autowired
+    DeleteUserService deleteUserService;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -45,8 +44,9 @@ public class AdminController {
     }
 
     @PostMapping("/selectuser")
-    public @ResponseBody User SelectUser(@RequestBody User user, HttpServletResponse response){
-                    return userService.getUser(user.getNumber());
+    public @ResponseBody
+    User SelectUser(@RequestBody User user, HttpServletResponse response) {
+        return userService.getUser(user.getNumber());
     }
 
     @PostMapping("/updateuser")
@@ -57,6 +57,16 @@ public class AdminController {
                     swd = passwordEncoder.encode(user.getPassword());
                     updateUserService.UpdateUser(user.getNumber(), user.getName(), user.getPro(),
                             user.getIntro(), user.getPhonenum(), swd, user.getAuthority(), user.getId());
+                }, () -> {
+                    throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "信息不能为空！");
+                });
+    }
+
+    @PostMapping("/deleteuser")
+    public void DeleteUser(@RequestBody User user, HttpServletResponse response) {
+        Optional.ofNullable(user)
+                .ifPresentOrElse(u -> {
+                    deleteUserService.DeleteUser(user.getNumber());
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "信息不能为空！");
                 });
