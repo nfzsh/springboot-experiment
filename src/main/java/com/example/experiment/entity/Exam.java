@@ -20,9 +20,9 @@ public class Exam {
     private String classRoom;//考场
     private int studentNum;//参加考试人数
     private boolean flag=false;//是否分配监考老师
-    @JsonFormat(pattern = "YY-MM-DD HH-MM")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm")
     private LocalDateTime startTime;//考试开始时间
-    @JsonFormat(pattern = "YY-MM-DD HH-MM")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm")
     private LocalDateTime endTime;//考试结束时间
     @ManyToOne
     User user;
@@ -30,12 +30,12 @@ public class Exam {
     updatable = false,
     insertable = false)
     private LocalDateTime insertTime;
-    public Exam(String name,String classRoom,int studentNum,LocalDateTime startTime,LocalDateTime endTime,boolean flag){
+    public Exam(String name,String classRoom,int studentNum,
+                LocalDateTime startTime,LocalDateTime endTime){
         this.name=name;
         this.classRoom=classRoom;
         this.studentNum=studentNum;
         this.startTime=startTime;
         this.endTime=endTime;
-        this.flag =flag;
     }
 }
