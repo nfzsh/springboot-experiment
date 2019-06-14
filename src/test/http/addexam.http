@@ -1,0 +1,11 @@
+POST http://localhost:8080/api/admin/addexam
+Content-Type: application/json
+
+{
+"name": "高等数学",
+  "classRoom": "丹青301",
+  "studentNum": 30,
+  "startTime": "2019-06-20 10:00",
+  "endTime": "2019-06-20 11:30"
+}
+###
