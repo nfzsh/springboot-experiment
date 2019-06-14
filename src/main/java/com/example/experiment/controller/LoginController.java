@@ -56,19 +56,5 @@ public class LoginController {
                     throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "用户名或密码错误");
                 });
     }
-    @PostMapping("/updateuser")
-    public void UpdateUser(@RequestBody User user, HttpServletResponse response) {
-        Optional.ofNullable(user)
-                .ifPresentOrElse(u -> {
-                    String swd;
-                    if (user.getPassword().equals("") || user.getPassword() == null)
-                        swd = "";
-                    else
-                        swd = passwordEncoder.encode(user.getPassword());
-                    updateUserService.UpdateUser(user.getNumber(), user.getName(), user.getPro(),
-                            user.getIntro(), user.getPhonenum(), swd, user.getAuthority(), user.getId());
-                }, () -> {
-                    throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "信息不能为空！");
-                });
-    }
+
 }

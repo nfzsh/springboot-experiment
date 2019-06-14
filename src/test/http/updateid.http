@@ -1,0 +1,21 @@
+POST http://localhost:8080/api/updateuser
+token: fd7afc87258cf92754bcba75bf12b786c3a9f2b2dd56e20f195a90e9370d003cb17ee617c3071b90158dd618d320c205
+Content-Type: application/json
+
+{
+  "number": "1003",
+  "name": "ghw",
+  "pro": "软件工程",
+  "intro":"student",
+  "phonenum": "123456789",
+  "password": "1003",
+  "authority": 1,
+  "id":4
+}
+
+###
+
+GET http://localhost:8080/api/selectuser
+token: fd7afc87258cf92754bcba75bf12b786c3a9f2b2dd56e20f195a90e9370d003cb17ee617c3071b90158dd618d320c205
+
+###

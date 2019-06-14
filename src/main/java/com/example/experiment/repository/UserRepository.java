@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends CustomizedRepoistory<User, Integer> {
     @Query("SELECT u FROM User u WHERE u.number=:number")
     User find(@Param("number") String number);
+    @Query("SELECT u FROM User u WHERE u.id=:id")
+    User findu(@Param("id") int id);
 }
