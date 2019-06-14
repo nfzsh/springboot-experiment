@@ -1,10 +1,8 @@
 package com.example.experiment.controller;
 
+import com.example.experiment.entity.Exam;
 import com.example.experiment.entity.User;
-import com.example.experiment.service.AddUserService;
-import com.example.experiment.service.DeleteUserService;
-import com.example.experiment.service.UpdateUserService;
-import com.example.experiment.service.UserService;
+import com.example.experiment.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +28,23 @@ public class AdminController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    //sxr添加
+    @Autowired
+    AddExamService addExamService;
+    @PostMapping("/addexam")
+    public void addExam(@RequestBody Exam exam,HttpServletResponse response){
+        Optional.ofNullable(exam)
+                .ifPresentOrElse(e->{
+                    addExamService.setExam(exam.getName(),
+                            exam.getClassRoom(), exam.getStudentNum(),
+                            exam.getStartTime(),exam.getEndTime()
+                            );
+                },() -> {
+                    throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "信息不能为空！");
+                });
+    }
+    //添加结束
+
     @PostMapping("/adduser")
     public void AddUser(@RequestBody User user, HttpServletResponse response) {
         Optional.ofNullable(user)
@@ -42,6 +57,8 @@ public class AdminController {
                     throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "信息不能为空！");
                 });
     }
+
+
 
     @PostMapping("/selectuser")
     public @ResponseBody
