@@ -38,7 +38,7 @@ public class AdminController {
         Optional.ofNullable(exam)
                 .ifPresentOrElse(e->{
                     addExamService.setExam(exam.getName(),
-                            exam.getClassRoom(), exam.getStudentNum(),
+                            exam.getClassRoom(), exam.getUserNum(),
                             exam.getStartTime(),exam.getEndTime()
                             );
                 },() -> {

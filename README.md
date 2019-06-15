@@ -8,3 +8,7 @@
 7.在service中添加examservice，编写通过考试科目名或考试id查询考试安排的方法
 8.在admincontroller中添加查询exam的方法
 9.在select.http中增加测试方法
+-------------6.15---大改------
+1.更改user与exam关系为多对多，取消原实体中的关系
+2.增加userexam实体，添加多对多关系
+3.将exam实体中的studentnum改为usernum，为考试监考老师数量

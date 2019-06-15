@@ -15,12 +15,12 @@ public class AddExamService {
     @PersistenceContext
     private EntityManager em;
     UserService u;
-    public void setExam(String name, String classRoom,int studentNum,
+    public void setExam(String name, String classRoom,int userNum,
                         LocalDateTime startTime,
                         LocalDateTime endTime){
 
         Exam e1=new Exam(name,classRoom,
-                studentNum, startTime, endTime);
+                userNum, startTime, endTime);
         em.persist(e1);
     }
 }

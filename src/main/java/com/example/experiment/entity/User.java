@@ -31,10 +31,7 @@ public class User {
     private int authority = 1;
     private int jiankaonum = 0;
 
-    //sxr添加
-    @OneToMany(mappedBy = "user")
-    List<Exam> exams;
-    //添加结束
+
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
             updatable = false,
             insertable = false)
