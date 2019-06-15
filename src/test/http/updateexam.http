@@ -1,0 +1,12 @@
+POST http://localhost:8080/api/admin/updateexam
+Content-Type: application/json
+
+{
+  "name": "高等数学",
+  "classRoom": "丹青302",
+  "userNum": 2,
+  "startTime": "2019-06-20 10:00",
+  "endTime": "2019-06-20 11:30",
+  "id": 1
+}
+###

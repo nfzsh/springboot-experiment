@@ -1,7 +1,6 @@
 package com.example.experiment.service;
 
 import com.example.experiment.entity.Exam;
-import com.example.experiment.entity.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +13,6 @@ import java.time.LocalDateTime;
 public class AddExamService {
     @PersistenceContext
     private EntityManager em;
-    UserService u;
     public void setExam(String name, String classRoom,int userNum,
                         LocalDateTime startTime,
                         LocalDateTime endTime){
