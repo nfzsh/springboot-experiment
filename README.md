@@ -4,3 +4,7 @@
 3.在service中添加addexamservice 
 5.在admincontroller中添加增加exam的方法
 6.在repository中增加examrepository
+----------6.15--1---------
+7.在service中添加examservice，编写通过考试科目名或考试id查询考试安排的方法
+8.在admincontroller中添加查询exam的方法
+9.在select.http中增加测试方法
