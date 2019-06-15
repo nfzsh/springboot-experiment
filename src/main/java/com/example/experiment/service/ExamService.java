@@ -11,11 +11,18 @@ import org.springframework.transaction.annotation.Transactional;
 public class ExamService {
     @Autowired
     private ExamRepository examRepository;
+
     //增加通过考试科目名或考试id查询考试安排的方法
-    public Exam getExamByName(String name){
+    public Exam getExamByName(String name) {
         return examRepository.find(name);
     }
-    public Exam getExamById(int id){
+
+    public Exam getExamById(int id) {
         return examRepository.findId(id);
     }
+
+    public Exam getExamByClass(String classRoom) {
+        return examRepository.findClass(classRoom);
+    }
+
 }

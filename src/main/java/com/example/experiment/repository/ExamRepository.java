@@ -13,4 +13,7 @@ public interface ExamRepository extends CustomizedRepoistory<Exam,Integer>{
     //根据name找考试
     @Query("SELECT e FROM Exam e WHERE e.name=:name")
     Exam find(@Param("name") String name);
+    //根据教室返回考试信息
+    @Query("SELECT e FROM Exam e WHERE e.classRoom=:classRoom")
+    Exam findClass(@Param("classRoom") String classRoom);
 }

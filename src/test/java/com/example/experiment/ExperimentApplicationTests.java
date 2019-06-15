@@ -1,5 +1,7 @@
 package com.example.experiment;
 
+import com.example.experiment.entity.Exam;
+import com.example.experiment.service.ExamService;
 import com.example.experiment.service.UpdateUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,11 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class ExperimentApplicationTests {
     @Autowired
     private UpdateUserService updateUserService;
+    @Autowired
+    private ExamService examService;
     @Test
     public void contextLoads() {
 
 
-        updateUserService.UpdateNum(3);
+        Exam exam = examService.getExamByClass("丹青302");
+        System.out.println(exam.getId());
     }
 
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Slf4j
@@ -20,55 +21,73 @@ public class AdminController {
     @Autowired
     private AddUserService addUserService;
     @Autowired
-    UpdateUserService updateUserService;
+    private UpdateUserService updateUserService;
     @Autowired
-    UserService userService;
+    private UserService userService;
     @Autowired
-    DeleteUserService deleteUserService;
+    private DeleteUserService deleteUserService;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     //sxr添加
     @Autowired
-    AddExamService addExamService;
+    private AddExamService addExamService;
     @Autowired
-    ExamService examService;
+    private ExamService examService;
     @Autowired
-    UpdateExamService updateExamService;
+    private UpdateExamService updateExamService;
 
     @PostMapping("/addexam")
-    public void addExam(@RequestBody Exam exam,HttpServletResponse response){
+    public void addExam(@RequestBody Exam exam, HttpServletResponse response) {
         Optional.ofNullable(exam)
-                .ifPresentOrElse(e->{
-                    addExamService.setExam(exam.getName(),
-                            exam.getClassRoom(), exam.getUserNum(),
-                            exam.getStartTime(),exam.getEndTime()
-                            );
-                },() -> {
+                .ifPresentOrElse(e -> {
+                    Exam dexam = examService.getExamByClass(exam.getClassRoom().trim());
+                    if (dexam != null) {
+                        LocalDateTime startTime = dexam.getStartTime();
+                        LocalDateTime endTime = dexam.getEndTime();
+                        if ((exam.getStartTime().compareTo(startTime) > 0 &&
+                                endTime.compareTo(exam.getStartTime()) > 0) ||
+                                (exam.getEndTime().compareTo(startTime) > 0 &&
+                                        endTime.compareTo(exam.getEndTime()) > 0)) {
+                            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "时间冲突！");
+                        } else if (exam.getStartTime().compareTo(startTime) <= 0 &&
+                                endTime.compareTo(exam.getEndTime()) <= 0) {
+                            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "时间冲突！");
+                        }
+                        else if(exam.getStartTime().compareTo(startTime) >= 0 &&
+                                endTime.compareTo(exam.getEndTime()) >= 0)
+                            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "时间冲突！");
+                    }
+                    addExamService.setExam(exam.getName(), exam.getClassRoom(), exam.getUserNum(),
+                            exam.getStartTime(), exam.getEndTime());
+                }, () -> {
                     throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "信息不能为空！");
                 });
     }
+
     //添加  依据id查询考试
     @PostMapping("/selectexam")
     public @ResponseBody
-    Exam SelectExam(@RequestBody Exam exam,HttpServletResponse response){
+    Exam SelectExam(@RequestBody Exam exam, HttpServletResponse response) {
         return examService.getExamById(exam.getId());
     }
+
     //添加  依据name查询考试
     @PostMapping("/selectname")
     public @ResponseBody
-    Exam SelectName(@RequestBody Exam exam,HttpServletResponse response){
+    Exam SelectName(@RequestBody Exam exam, HttpServletResponse response) {
         return examService.getExamByName(exam.getName());
     }
+
     //添加update exam信息
     @PostMapping("/updateexam")
-    public void UpdateExam(@RequestBody Exam exam,HttpServletResponse response){
+    public void UpdateExam(@RequestBody Exam exam, HttpServletResponse response) {
         Optional.ofNullable(exam)
-                .ifPresentOrElse(e->{
+                .ifPresentOrElse(e -> {
                     updateExamService.updateAll(exam.getName(),
                             exam.getClassRoom(), exam.getUserNum(),
                             exam.getStartTime(), exam.getEndTime(), exam.getId());
-                },() -> {
+                }, () -> {
                     throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "信息不能为空！");
                 });
     }
@@ -86,7 +105,6 @@ public class AdminController {
                     throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "信息不能为空！");
                 });
     }
-
 
 
     @PostMapping("/selectuser")
