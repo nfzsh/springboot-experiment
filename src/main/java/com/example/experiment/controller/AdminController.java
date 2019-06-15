@@ -33,6 +33,9 @@ public class AdminController {
     AddExamService addExamService;
     @Autowired
     ExamService examService;
+    @Autowired
+    UpdateExamService updateExamService;
+
     @PostMapping("/addexam")
     public void addExam(@RequestBody Exam exam,HttpServletResponse response){
         Optional.ofNullable(exam)
@@ -56,6 +59,18 @@ public class AdminController {
     public @ResponseBody
     Exam SelectName(@RequestBody Exam exam,HttpServletResponse response){
         return examService.getExamByName(exam.getName());
+    }
+    //添加update exam信息
+    @PostMapping("/updateexam")
+    public void UpdateExam(@RequestBody Exam exam,HttpServletResponse response){
+        Optional.ofNullable(exam)
+                .ifPresentOrElse(e->{
+                    updateExamService.updateAll(exam.getName(),
+                            exam.getClassRoom(), exam.getUserNum(),
+                            exam.getStartTime(), exam.getEndTime(), exam.getId());
+                },() -> {
+                    throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "信息不能为空！");
+                });
     }
     //添加结束
 
