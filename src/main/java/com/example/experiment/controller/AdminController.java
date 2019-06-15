@@ -31,17 +31,31 @@ public class AdminController {
     //sxr添加
     @Autowired
     AddExamService addExamService;
+    @Autowired
+    ExamService examService;
     @PostMapping("/addexam")
     public void addExam(@RequestBody Exam exam,HttpServletResponse response){
         Optional.ofNullable(exam)
                 .ifPresentOrElse(e->{
                     addExamService.setExam(exam.getName(),
-                            exam.getClassRoom(), exam.getStudentNum(),
+                            exam.getClassRoom(), exam.getUserNum(),
                             exam.getStartTime(),exam.getEndTime()
                             );
                 },() -> {
                     throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "信息不能为空！");
                 });
+    }
+    //添加  依据id查询考试
+    @PostMapping("/selectexam")
+    public @ResponseBody
+    Exam SelectExam(@RequestBody Exam exam,HttpServletResponse response){
+        return examService.getExamById(exam.getId());
+    }
+    //添加  依据name查询考试
+    @PostMapping("/selectname")
+    public @ResponseBody
+    Exam SelectName(@RequestBody Exam exam,HttpServletResponse response){
+        return examService.getExamByName(exam.getName());
     }
     //添加结束
 

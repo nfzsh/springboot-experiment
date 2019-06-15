@@ -18,23 +18,21 @@ public class Exam {
     private int id;
     private String name;//考试科目
     private String classRoom;//考场
-    private int studentNum;//参加考试人数
+    private int userNum;//监考人数
     private boolean flag=false;//是否分配监考老师
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm")
     private LocalDateTime startTime;//考试开始时间
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm")
     private LocalDateTime endTime;//考试结束时间
-    @ManyToOne
-    User user;
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
     updatable = false,
     insertable = false)
     private LocalDateTime insertTime;
-    public Exam(String name,String classRoom,int studentNum,
+    public Exam(String name,String classRoom,int userNum,
                 LocalDateTime startTime,LocalDateTime endTime){
         this.name=name;
         this.classRoom=classRoom;
-        this.studentNum=studentNum;
+        this.userNum=userNum;
         this.startTime=startTime;
         this.endTime=endTime;
     }

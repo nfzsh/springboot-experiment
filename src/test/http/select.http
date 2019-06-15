@@ -6,3 +6,20 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:8080/api/admin/selectexam
+Content-Type: application/json
+
+{
+  "id": 1
+}
+
+###
+
+POST http://localhost:8080/api/admin/selectname
+Content-Type: application/json
+
+{
+  "name": "高等数学"
+}
+
+###
