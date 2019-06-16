@@ -33,3 +33,9 @@
 8.添加定时器启动注解
 9.添加组件MyTime，定时检测第二天是否有考试
  有则输出信息
+-------------6.16--3-----------------
+10.删除原在adduserexamservice中的改变flag状态的方法
+在admincontroller中添加修改flag值的方法
+11.在updateexamrepository和updateexamservice中添加修改flag的相应语句
+12.在component中增加mytimechange类，增加定时器，每天定时查询当日完成的考试一次
+    并且对flag值和jiankaonum进行相应更改

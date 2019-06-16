@@ -105,6 +105,7 @@ public class AdminController {
     //添加userexam表
     @PostMapping("/adduserexam")
     public Map AddUserExam(@RequestBody UserExam userExam){
+        updateExamService.UpdateFlag(2, userExam.getExam().getId());
         addUserExamService.setUserExam(userExam);
         return Map.of("newUserExam",userExam);
     }

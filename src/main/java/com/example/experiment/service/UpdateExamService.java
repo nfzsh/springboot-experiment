@@ -17,4 +17,7 @@ public class UpdateExamService {
          updateExamRepository.Update(name, classRoom, userNum,
                  startTime, endTime, id);
     }
+    public void UpdateFlag(int flag,int id){
+        updateExamRepository.Update(flag,id);
+    }
 }

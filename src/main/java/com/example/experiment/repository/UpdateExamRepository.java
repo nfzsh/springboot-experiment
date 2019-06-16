@@ -9,12 +9,15 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 
 @Repository
-public interface UpdateExamRepository extends CustomizedRepoistory<Exam,Integer>{
+public interface UpdateExamRepository extends CustomizedRepoistory<Exam,Integer> {
     @Modifying
     @Query("UPDATE Exam e SET e.name=:name,e.classRoom=:classRoom,e.userNum=:userNum," +
             "e.startTime=:startTime,e.endTime=:endTime WHERE e.id=:id")
     void Update(@Param("name") String name, @Param("classRoom") String classRoom,
                 @Param("userNum") int userNum, @Param("startTime") LocalDateTime startTime,
-                @Param("endTime") LocalDateTime endTime,@Param("id") int id);
+                @Param("endTime") LocalDateTime endTime, @Param("id") int id);
 
+    @Modifying
+    @Query("UPDATE Exam e SET e.flag=:flag WHERE e.id=:id")
+    void Update(@Param("flag")int flag,@Param("id") int id);
 }
