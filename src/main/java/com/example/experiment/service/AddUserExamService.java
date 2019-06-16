@@ -13,6 +13,7 @@ public class AddUserExamService {
     private UserExamRepository userExamRepository;
     //添加监考安排
     public UserExam setUserExam(UserExam userExam){
+        userExam.getExam().setFlag(2);
         userExamRepository.save(userExam);
         return userExamRepository.refresh(userExam);
     }
