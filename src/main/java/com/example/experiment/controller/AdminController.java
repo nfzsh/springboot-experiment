@@ -2,6 +2,7 @@ package com.example.experiment.controller;
 
 import com.example.experiment.entity.Exam;
 import com.example.experiment.entity.User;
+import com.example.experiment.entity.UserExam;
 import com.example.experiment.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
@@ -36,6 +39,12 @@ public class AdminController {
     private ExamService examService;
     @Autowired
     private UpdateExamService updateExamService;
+    @Autowired
+    private AddUserExamService addUserExamService;
+    @Autowired
+    private UserExamService userExamService;
+    @Autowired
+    private UpdateUserExamService updateUserExamService;
 
     @PostMapping("/addexam")
     public void addExam(@RequestBody Exam exam, HttpServletResponse response) {
@@ -61,21 +70,23 @@ public class AdminController {
                     throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "信息不能为空！");
                 });
     }
-
     //添加  依据id查询考试
     @PostMapping("/selectexam")
     public @ResponseBody
     Exam SelectExam(@RequestBody Exam exam, HttpServletResponse response) {
         return examService.getExamById(exam.getId());
     }
-
     //添加  依据name查询考试
     @PostMapping("/selectname")
     public @ResponseBody
     Exam SelectName(@RequestBody Exam exam, HttpServletResponse response) {
         return examService.getExamByName(exam.getName());
     }
-
+    //查询所有考试信息
+    @PostMapping("/selectlist")
+    public List<Exam> SelectList(HttpServletResponse response){
+        return examService.getExamList();
+    }
     //添加update exam信息
     @PostMapping("/updateexam")
     public void UpdateExam(@RequestBody Exam exam, HttpServletResponse response) {
@@ -87,6 +98,21 @@ public class AdminController {
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "信息不能为空！");
                 });
+    }
+    //添加userexam表
+    @PostMapping("/adduserexam")
+    public Map AddUserExam(@RequestBody UserExam userExam){
+        addUserExamService.setUserExam(userExam);
+        return Map.of("newUserExam",userExam);
+    }
+    @PostMapping("/selectuserexamlist")
+    public Map SelectUserExamList(){
+        return Map.of("UserExamList",userExamService.getUserExamList());
+    }
+    @PostMapping("/updateuserexam")
+    public Map UpdateUserExam(@RequestBody UserExam userExam){
+        System.out.println("sakhcba"+userExam.getId());
+        return Map.of("UpdateUserExam", updateUserExamService.updateUserExam(userExam));
     }
     //添加结束
 

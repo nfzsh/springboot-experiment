@@ -16,6 +16,15 @@
 4.在repository中增加updateexamrepository,增加更新方法
 5.在service中添加updateexamservice
 6.在test中增加updateexam调试
-调试存在问题：
-Cannot deserialize value of type `
-java.time.LocalDateTime` from String \"2019-06-20T10:00\"
+-------------6.16--4--------------
+7.在examrepository,examservice,admincontroller中添加查询所有考试信息的方法
+   在select.http中实现
+-------------6.17--1--------------
+将exam实体中的flag改为int型，123表示未分配，已分配，已完成
+1.添加userexamrepository
+2.添加userexamservice，adduserexamservice
+3.手动增加userexam
+4.添加查询所有userexam的方法，
+5.在select.http中测试
+6.添加updateuserexamservice,添加修改考试安排的方法
+在updateuserexam.http中测试

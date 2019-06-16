@@ -23,3 +23,11 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:8080/api/admin/selectlist
+Content-Type: application/json
+
+###
+POST http://localhost:8080/api/admin/selectuserexamlist
+Content-Type: application/json
+
+###

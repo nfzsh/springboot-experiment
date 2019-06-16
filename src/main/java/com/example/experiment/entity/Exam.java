@@ -19,7 +19,7 @@ public class Exam {
     private String name;//考试科目
     private String classRoom;//考场
     private int userNum;//监考人数
-    private boolean flag=false;//是否分配监考老师
+    private int flag=1;//状态：1未分配，2已分配，3完成
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm")
     private LocalDateTime startTime;//考试开始时间
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm")

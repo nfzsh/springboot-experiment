@@ -1,0 +1,14 @@
+POST http://localhost:8080/api/admin/updateuserexam
+Content-Type: application/json
+
+{
+  "id": 1,
+"user":{
+      "id": 1
+    },
+  "exam": {
+    "id": 2
+  }
+}
+
+###
