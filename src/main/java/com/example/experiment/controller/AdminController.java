@@ -107,8 +107,14 @@ public class AdminController {
     public Map AddUserExam(@RequestBody UserExam userExam){
         updateExamService.UpdateFlag(2, userExam.getExam().getId());
         addUserExamService.setUserExam(userExam);
+        //增加分配时的消息
+        log.debug(userExam.getExam().getName()+"  考试时间为："+userExam.getExam().getStartTime()+
+                " 至 "+userExam.getExam().getEndTime()+" 考试地点在： "+userExam.getExam().getClassRoom()+
+                " 监考老师为： "+userExam.getUser().getName()+" 他/她的监考次数为： "+
+                userExam.getUser().getJiankaonum());
         return Map.of("newUserExam",userExam);
     }
+    //查询所有考试和安排信息
     @PostMapping("/selectuserexamlist")
     public Map SelectUserExamList(){
         return Map.of("UserExamList",userExamService.getUserExamList());

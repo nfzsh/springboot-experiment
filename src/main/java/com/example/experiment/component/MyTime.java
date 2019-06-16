@@ -42,7 +42,7 @@ public class MyTime {
                         "  考试地点："+exams.get(i).getClassRoom()+
                         "  考试开始时间："+exams.get(i).getStartTime()+
                         "  考试结束时间："+exams.get(i).getEndTime());
-                log.debug("        "+name);
+                log.debug(" 监考教师有："+name);
             }
         }
     }

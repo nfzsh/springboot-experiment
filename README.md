@@ -39,3 +39,9 @@
 11.在updateexamrepository和updateexamservice中添加修改flag的相应语句
 12.在component中增加mytimechange类，增加定时器，每天定时查询当日完成的考试一次
     并且对flag值和jiankaonum进行相应更改
+-------------6.16--4-----------------
+13.在admincontroller中 AddUserExam添加输出信息，显示考试时间地点和教师，监考次数
+14.在UserExamService，UserExamRepository，UserRepository，UserService
+    中添加相应查询语句
+15.增加定时器 MyTimeJian 定时检测是否有一个教师同时监考两门考试的情况
+    有则输出警告

@@ -1,5 +1,6 @@
 package com.example.experiment.repository;
 
+import com.example.experiment.entity.Exam;
 import com.example.experiment.entity.User;
 import com.example.experiment.entity.UserExam;
 import org.springframework.data.jpa.repository.Query;
@@ -22,4 +23,7 @@ public interface UserExamRepository extends CustomizedRepoistory<UserExam,Intege
     //依据考试id查监考教师
     @Query("SELECT ue.user FROM UserExam ue WHERE ue.exam.id=:eid")
     List<User> findU(@Param("eid") int eid);
+    //依据教师id查考试
+    @Query("SELECT ue.exam FROM UserExam ue WHERE ue.user.id=:id")
+    List<Exam> findE(@Param("id") int id);
 }
