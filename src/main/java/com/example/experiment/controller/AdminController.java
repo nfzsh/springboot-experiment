@@ -63,9 +63,6 @@ public class AdminController {
                                 endTime.compareTo(exam.getEndTime()) <= 0) {
                             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "时间冲突！");
                         }
-                        else if(exam.getStartTime().compareTo(startTime) >= 0 &&
-                                endTime.compareTo(exam.getEndTime()) >= 0)
-                            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "时间冲突！");
                     }
                     addExamService.setExam(exam.getName(), exam.getClassRoom(), exam.getUserNum(),
                             exam.getStartTime(), exam.getEndTime());
