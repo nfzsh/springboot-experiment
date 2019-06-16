@@ -1,0 +1,13 @@
+POST http://localhost:8080/api/admin/adduserexam
+Content-Type: application/json
+
+{
+  "user": {
+    "id": 1
+  },
+  "exam": {
+    "id": 1
+  }
+}
+
+###

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class ExamService {
@@ -24,5 +26,5 @@ public class ExamService {
     public Exam getExamByClass(String classRoom) {
         return examRepository.findClass(classRoom);
     }
-
+    public List<Exam> getExamList(){return examRepository.liste();}
 }
