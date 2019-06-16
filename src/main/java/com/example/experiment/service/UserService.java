@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class UserService {
@@ -16,5 +18,8 @@ public class UserService {
     }
     public User getUserid(int id) {
         return userRepository.findu(id);
+    }
+    public List<User> getUList(){
+        return userRepository.list();
     }
 }
