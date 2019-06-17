@@ -1,0 +1,15 @@
+POST http://localhost:8080/api/endtime
+Content-Type: application/json
+
+{
+
+  "text": "任务完成测试",
+  "user": {
+    "id": 1
+  },
+  "message": {
+    "id": 7
+  }
+}
+
+###

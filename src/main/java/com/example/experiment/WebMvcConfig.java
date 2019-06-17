@@ -31,7 +31,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/api/admin/selectlist")
                 .excludePathPatterns("/api/admin/adduserexam")
                 .excludePathPatterns("/api/admin/selectuserexamlist")
-                .excludePathPatterns("/api/admin/updateuserexam");
+                .excludePathPatterns("/api/admin/updateuserexam")
+                .excludePathPatterns("/api/admin/updatem")
+                .excludePathPatterns("/api/admin/closem")
+                .excludePathPatterns("/api/admin/addmu")
+                .excludePathPatterns("/api/admin/addm")
+                .excludePathPatterns("/api/endtime")
+                .excludePathPatterns("/api/allm");
 //        registry.addInterceptor(adminInterceptor)
 //                .addPathPatterns("/api/admin");
     }

@@ -13,6 +13,6 @@ public interface UserRepository extends CustomizedRepoistory<User, Integer> {
     User find(@Param("number") String number);
     @Query("SELECT u FROM User u WHERE u.id=:id")
     User findu(@Param("id") int id);
-    @Query("SELECT u FROM User u WHERE u.number=:number")
-    List<User> list(@Param("number") String number);
+    @Query("SELECT u FROM User u")
+    List<User> list();
 }

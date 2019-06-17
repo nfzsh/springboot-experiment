@@ -1,0 +1,8 @@
+POST http://localhost:8080/api/admin/updatem
+Content-Type: application/json
+
+{
+  "name": "abc",
+  "description": "新的任务说明"
+}
+###

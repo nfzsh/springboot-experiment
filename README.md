@@ -28,3 +28,20 @@
 5.在select.http中测试
 6.添加updateuserexamservice,添加修改考试安排的方法
 在updateuserexam.http中测试
+-------------6.16--2---------------
+7.补充添加在监考被分配时，考试状态变为2
+8.添加定时器启动注解
+9.添加组件MyTime，定时检测第二天是否有考试
+ 有则输出信息
+-------------6.16--3-----------------
+10.删除原在adduserexamservice中的改变flag状态的方法
+在admincontroller中添加修改flag值的方法
+11.在updateexamrepository和updateexamservice中添加修改flag的相应语句
+12.在component中增加mytimechange类，增加定时器，每天定时查询当日完成的考试一次
+    并且对flag值和jiankaonum进行相应更改
+-------------6.16--4-----------------
+13.在admincontroller中 AddUserExam添加输出信息，显示考试时间地点和教师，监考次数
+14.在UserExamService，UserExamRepository，UserRepository，UserService
+    中添加相应查询语句
+15.增加定时器 MyTimeJian 定时检测是否有一个教师同时监考两门考试的情况
+    有则输出警告
