@@ -107,6 +107,7 @@ public class AdminController {
     @PostMapping("/selectexam")
     public @ResponseBody
     Exam SelectExam(@RequestBody Exam exam, HttpServletResponse response) {
+        System.out.println(exam.getId());
         return examService.getExamById(exam.getId());
     }
     //添加  依据name查询考试
@@ -116,7 +117,8 @@ public class AdminController {
         return examService.getExamByName(exam.getName());
     }
     //查询所有考试信息
-    @PostMapping("/selectlist")
+    @GetMapping("/selectlist")
+    @ResponseBody
     public List<Exam> SelectList(HttpServletResponse response){
         return examService.getExamList();
     }
@@ -161,6 +163,7 @@ public class AdminController {
         Optional.ofNullable(user)
                 .ifPresentOrElse(u -> {
                     String swd;
+                    System.out.println(user.getPassword());
                     swd = passwordEncoder.encode(user.getPassword());
                     addUserService.setUser(user.getNumber(), user.getName(), user.getPro(),
                             user.getIntro(), user.getPhonenum(), swd, user.getAuthority());
