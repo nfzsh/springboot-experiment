@@ -1,8 +1,6 @@
 package com.example.experiment.controller;
 
-import com.example.experiment.entity.Exam;
-import com.example.experiment.entity.User;
-import com.example.experiment.entity.UserExam;
+import com.example.experiment.entity.*;
 import com.example.experiment.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +43,41 @@ public class AdminController {
     private UserExamService userExamService;
     @Autowired
     private UpdateUserExamService updateUserExamService;
+
+    //ghw
+    @Autowired
+    private AddMessageService addMessageService;
+    @Autowired
+    private  AddMessageUserSevervice addMessageUserSevervice;
+    @Autowired
+    private  UpdateMessageService updateMessageService;
+    //更新任务信息
+    @PostMapping("/updatem")
+    public  void  updateMessage(@RequestBody Message message){
+        System.out.println(message.getDescription()+message.getName());
+        updateMessageService.updateMessage(message.getDescription(),message.getName());
+    }
+    //修改任务状态 报错
+    @PostMapping("/closem")
+    public void  closeMessage(@RequestBody Message message){
+        System.out.println(message.getName());
+        updateMessageService.closeMessage(message.getName());
+    }
+    //配置任务人员
+    @PostMapping("/addmu")
+    public Map createMessageUser(@RequestBody MessageUser messageUser)
+    {
+        addMessageUserSevervice.createMessageUser(messageUser);
+        return Map.of("newMessageUser",messageUser);
+    }
+    //新增任务
+    @PostMapping("/addm")
+    public void  setMessage(@RequestBody Message message)
+    {
+        System.out.println(message.getEndTime());
+        addMessageService.setMessage(message.getName(), message.getDescription(), message.getEndTime());
+    }
+    //ghw部分结束
 
     @PostMapping("/addexam")
     public void addExam(@RequestBody Exam exam, HttpServletResponse response) {
